@@ -35,10 +35,11 @@ async function get_data(title, spotifyApi) {
     }
     var results;
     try {
-        results = _.chain(resp.tracks.items)
+        results = _.chain(resp.body.tracks.items)
+            /*
             .reject(function(data) {
                 return !data.images;
-            })
+            })*/
             .map(function(data) {
                 return {
                     title: createTemplate(data),
@@ -53,7 +54,7 @@ async function get_data(title, spotifyApi) {
     return results;
 }
 
-module.exports = function(req, res) {
+module.exports = async function(req, res) {
     /* The search string will consist of either: album, song name, or artist.
      */
     var search = req.query.text;
@@ -63,7 +64,7 @@ module.exports = function(req, res) {
         res.json([{
             title: '<i>(no results)</i>',
             text: ''
-        });
+        }]);
     } else {
         res.json(results);
     }
