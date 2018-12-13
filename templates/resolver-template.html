@@ -7,11 +7,11 @@
   border-radius: 2px;
   padding: 0.45rem;
 ">
-  <a href="<% return data.permalink_url %>" target="_blank">
+  <a href="<% return data.album.images[0].url %>" target="_blank">
     <img style="
       height: 100px;
       border-radius: 2px;
-    " src="<% return data.artwork_url %>">
+    " src="<% return data.external_urls.spotify %>">
   </a>
   <div style="
     font-family: Proxima Nova, Helvetica Neue, sans-serif;
@@ -39,14 +39,13 @@
       width: 445px;
     ">
       <a href="<%
-        if (data.user) return data.user.permalink_url;
-        return '';
+        return data.artists[0].external_urls.spotify;
       %>" target="_blank" style="
         text-decoration: none;
         color: rgb(111, 111, 111);
       ">
         <%
-          return 'Spotify';
+          return data.album.artists[0].name;
         %>
       </a>
     </div>
