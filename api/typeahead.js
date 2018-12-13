@@ -12,13 +12,13 @@ async function spotify_auth() {
         var data = await spotifyApi.clientCredentialsGrant();
     } catch (e) {
         console.log("Credentials not granted!");
-        console.log(e);
+        throw new Error(e);
     }
     try {
         await spotifyApi.setAccessToken(data.body['access_token']);
     } catch (e) {
         console.log("Unable to retrieve access token.");
-        console.log(e);
+        throw new Error(e);
     }
     return spotifyApi;
 }
@@ -31,7 +31,7 @@ async function get_data(title, spotifyApi) {
         var resp = await spotifyApi.searchTracks(title);
     } catch (e) {
         console.log("Unable to find song.")
-        console.log(e);
+        throw new Error(e);
     }
     var results;
     try {
@@ -41,6 +41,9 @@ async function get_data(title, spotifyApi) {
                 return !data.images;
             })*/
             .map(function(data) {
+                console.log("artwork: ", data.album.images[0].url);
+                console.log("song name: ", data.name);
+                console.log("artist: ", data.album.artists[0].name);
                 return {
                     title: createTemplate(data),
                     text: data.external_urls.spotify
@@ -49,7 +52,7 @@ async function get_data(title, spotifyApi) {
             .value();
     } catch (e) {
         console.log("Unable to map data to resolver.")
-        console.log(e);
+        throw new Error(e);
     }
     return results;
 }
@@ -60,12 +63,13 @@ module.exports = async function(req, res) {
     var search = req.query.text;
     var spotify_api = await spotify_auth();
     var response = await get_data(search, spotify_api);
+    console.log("response: ", response)
     if (response.length === 0) {
         res.json([{
             title: '<i>(no results)</i>',
             text: ''
         }]);
     } else {
-        res.json(results);
+        res.json(response);
     }
 };

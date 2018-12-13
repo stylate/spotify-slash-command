@@ -3,7 +3,7 @@
   flex-flow: row nowrap;
   align-items: center;
 ">
-  <img style="height:40px" src="<% return data.artwork_url %>">
+  <img style="height:40px" src="<% return data.album.images[0].url %>">
   <div style="
     margin-left: 0.4rem;
     white-space: nowrap;
@@ -11,7 +11,7 @@
     text-overflow: ellipsis;
   ">
     <span>
-      <% return data.title %>
+      <% return data.name %>
     </span>
     <br>
     <span style="
@@ -20,8 +20,8 @@
       font-size: 0.9em;
     ">
       <%
-        if (data.user) return data.user.username;
-        return 'Username';
+        if (data.album.artists) return data.album.artists[0].name;
+        return 'Artist';
       %>
     </span>
   </div>
