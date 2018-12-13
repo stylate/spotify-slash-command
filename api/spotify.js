@@ -2,10 +2,16 @@ var key = require('../utils/key');
 var SpotifyWebApi = require('spotify-web-api-node');
 
 async function spotify_auth() {
-    var spotifyApi = new SpotifyWebApi({
-        clientId: key.client_key,
-        clientSecret: key.client_secret
-    });
+    var spotifyApi, data;
+    try {
+        spotifyApi = new SpotifyWebApi({
+            clientId: key.client_key,
+            clientSecret: key.client_secret
+        });
+    } catch (e) {
+        console.log("Unable to initialize Spotify API.");
+        throw new Error(e);
+    }
     try {
         var data = await spotifyApi.clientCredentialsGrant();
     } catch (e) {
@@ -29,7 +35,7 @@ async function get_data(title, spotifyApi) {
         var resp = await spotifyApi.searchTracks(title);
     } catch (e) {
         console.log("Unable to find song.")
-        throw new Error(e);
+        // throw new Error(e);
     }
     return resp;
 }
