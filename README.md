@@ -1,6 +1,6 @@
 # Spotify Slash Command for Mixmax
 
-An open source slashcommand for Mixmax's API. https://sdk.mixmax.com/ This command will allow you to input tracks from Spotify.
+An open source slashcommand for Mixmax's API. This command will allow you to input tracks from Spotify. https://sdk.mixmax.com
 
 ## Running locally
 
@@ -20,3 +20,5 @@ An open source slashcommand for Mixmax's API. https://sdk.mixmax.com/ This comma
     ```
 5. Restart Chrome using the following command on OSX/Linux: `open -a Google\ Chrome --args --ignore-certificate-errors`.
 6. Compose a message in Gmail with the Mixmax extension. Type in `/spotify` and you'll get the following: 
+![screen](screenshots/dropdown.png)
+![screen](screenshots/results.png)
