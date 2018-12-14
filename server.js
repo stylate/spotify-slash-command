@@ -6,12 +6,12 @@ var path = require('path');
 
 // Since Mixmax calls this API directly from the client-side, it must be whitelisted.
 var corsOptions = {
-    origin: /^[^.\s]+\.maxmax\.com$/,
-    credentials: true
+  origin: /^[^.\s]+\.mixmax\.com$/,
+  credentials: true
 };
 
-app.get('/typeahead', cors(corsOptions), require('./api/typeahead'));
 app.get('/resolver', cors(corsOptions), require('./api/resolver'));
+app.get('/typeahead', cors(corsOptions), require('./api/typeahead'));
 
 if (process.env.NODE_ENV === 'production') {
   app.listen(process.env.PORT || 8000);

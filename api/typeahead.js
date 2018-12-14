@@ -25,7 +25,7 @@ module.exports = async function(req, res) {
             .map(function(data) {
                 return {
                     title: createTemplate(data),
-                    text: data.external_urls.spotify
+                    text: data.id
                 };
             })
             .value();

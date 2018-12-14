@@ -4,10 +4,11 @@ var createTemplate = require('../utils/template.js').resolver;
 // in-email representation
 module.exports = async function (req, res) {
     var term = req.query.text.trim();
+    console.log("term: ", term)
     var spotify_api = await spotify.spotify_auth();
-    var response = await spotify.get_data(term, spotify_api);
-    console.log("resolver resp: ", response.body.tracks.items[0]);
+    var response = await spotify.get_track(term, spotify_api);
+    console.log("album artwork: ", response.body.album.images[0].url);
     res.json({
-        body: createTemplate(response.body.tracks.items[0])
+        body: createTemplate(response.body)
     });
 }

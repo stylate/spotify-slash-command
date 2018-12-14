@@ -1,6 +1,8 @@
 var key = require('../utils/key');
 var SpotifyWebApi = require('spotify-web-api-node');
 
+
+/* Creates a Spotify API instance and authenticate credentials. */
 async function spotify_auth() {
     var spotifyApi, data;
     try {
@@ -40,7 +42,19 @@ async function get_data(title, spotifyApi) {
     return resp;
 }
 
+/* Retrieve a track object given the unique Spotify ID. */
+async function get_track(ID, spotifyApi) {
+    try {
+        var resp = await spotifyApi.getTrack(ID);
+        console.log("track resp: ", resp);
+    } catch (e) {
+        console.log("Unable to retrieve track.");
+    }
+    return resp;
+}
+
 module.exports = {
     spotify_auth: spotify_auth,
-    get_data: get_data
+    get_data: get_data,
+    get_track: get_track
 };
