@@ -14,7 +14,7 @@ app.get('/resolver', cors(corsOptions), require('./api/resolver'));
 app.get('/typeahead', cors(corsOptions), require('./api/typeahead'));
 
 if (process.env.NODE_ENV === 'production') {
-  app.listen(process.env.PORT || 8000);
+  app.listen(process.env.PORT || 9145);
 } else {
   var pem = require('pem');
   var https = require('https');
@@ -23,6 +23,6 @@ if (process.env.NODE_ENV === 'production') {
     https.createServer({
       key: keys.serviceKey,
       cert: keys.certificate
-    }, app).listen(process.env.PORT || 8000);
+    }, app).listen(process.env.PORT || 9145);
   });
 }

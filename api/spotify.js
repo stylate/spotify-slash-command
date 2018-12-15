@@ -46,7 +46,6 @@ async function get_data(title, spotifyApi) {
 async function get_track(ID, spotifyApi) {
     try {
         var resp = await spotifyApi.getTrack(ID);
-        console.log("track resp: ", resp);
     } catch (e) {
         console.log("Unable to retrieve track.");
     }
