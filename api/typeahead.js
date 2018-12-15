@@ -13,7 +13,6 @@ module.exports = async function(req, res) {
         }]);
         return;
     }
-    console.log("search: ", search);
     var spotify_api = await spotify.spotify_auth();
     var response = await spotify.get_data(search, spotify_api);
     var results;
